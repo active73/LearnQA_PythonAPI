@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 # Ex5
 json_text = '{"messages":[{"message":"This is the first message","timestamp":"2021-06-04 16:40:53"},{"message":"And this is a second message","timestamp":"2021-06-04 16:41:01"}]}'
@@ -41,3 +42,13 @@ for method in methods:
     print(f"Ответ на put-запрос с методом {method['method']}: {response8.text}")
     response9 = requests.delete("https://playground.learnqa.ru/ajax/api/compare_query_type", data=method)
     print(f"Ответ на delete-запрос с методом {method['method']}: {response9.text}")
+    
+
+# Ex8
+response = requests.get("https://playground.learnqa.ru/ajax/api/longtime_job")
+token = response.json()["token"]
+response2 = requests.get("https://playground.learnqa.ru/ajax/api/longtime_job", params={"token": token})
+assert response2.json()["status"] == 'Job is NOT ready', "Job is ready or token is wrong"
+time.sleep(5)
+response3 = requests.get("https://playground.learnqa.ru/ajax/api/longtime_job", params={"token": token})
+assert response3.json()["status"] == 'Job is ready' and response3.json()["result"], "Wrong status or no result"
