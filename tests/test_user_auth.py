@@ -23,8 +23,8 @@ class TestUserAuth(BaseCase):
     def test_auth_user(self):
         response2 = requests.get(
             "https://playground.learnqa.ru/api/user/auth",
-            headers = {'x-csrf-token': self.token},
-            cookies = {'auth_sid': self.auth_sid}
+            headers={'x-csrf-token': self.token},
+            cookies={'auth_sid': self.auth_sid}
         )
 
         Assertions.assert_json_value_by_name(
