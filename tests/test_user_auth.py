@@ -1,5 +1,4 @@
 import requests
-import pytest
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 
@@ -33,3 +32,4 @@ class TestUserAuth(BaseCase):
             self.user_id_from_auth_method,
             "user id from auth method is not equal to user id from check method"
         )
+        print("Hi")
