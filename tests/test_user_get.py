@@ -1,10 +1,13 @@
 from lib.base_case import BaseCase
 from lib.my_requests import MyRequests
 from lib.assertions import Assertions
+import allure
 
 
+@allure.epic("Get user cases")
 class TestUserGet(BaseCase):
 
+    @allure.description("This is test get user details auth as another user")
     def test_get_user_details_auth_as_another_user(self):
         data = {
             'email': 'vinkotov@example.com',

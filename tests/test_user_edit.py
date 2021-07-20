@@ -1,9 +1,11 @@
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 from lib.my_requests import MyRequests
+import allure
 
-
+@allure.epic("Edit user cases")
 class TestUserEdit(BaseCase):
+    @allure.description("This is test edit user without authorization")
     def test_edit_user_without_authorization(self):
         # REGISTER
         register_data =self.prepare_registration_data()
@@ -19,6 +21,7 @@ class TestUserEdit(BaseCase):
         Assertions.assert_code_status(response, 400)
         assert response.content.decode('utf-8') == 'Auth token not supplied', 'User edit without authorization'
 
+    @allure.description("This is test edit user auth as another user")
     def test_edit_user_auth_as_another_user(self):
         # REGISTER
         register_data =self.prepare_registration_data()
@@ -66,6 +69,7 @@ class TestUserEdit(BaseCase):
             "Edit name user auth as another user"
         )
 
+    @allure.description("This is test edit user with wrong email")
     def test_edit_user_with_wrong_email(self):
         # REGISTER
         register_data =self.prepare_registration_data()
